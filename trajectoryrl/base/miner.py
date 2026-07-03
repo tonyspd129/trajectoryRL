@@ -92,36 +92,52 @@ class TrajectoryMiner:
 
     @staticmethod
     def _sanitize_keyfile(path: Path, password: Optional[str] = None) -> None:
-        """Strip cryptoType added by bittensor-wallet>=4.1.0 that 4.0.1 rejects.
+        """Strip the ``cryptoType`` field that bittensor-wallet>=4.1.0 embeds
+        and bittensor-wallet 4.0.1 (this venv) cannot deserialize.
 
-        For unencrypted JSON files: strips the field in-place.
-        For NACL-encrypted files: decrypts with bittensor_wallet (which supports
-        the newer format), strips cryptoType, then re-saves as plain JSON so
-        bittensor_wallet 4.0.1 can read it without a password prompt.
+        Unencrypted JSON keyfiles are stripped in place.
+
+        NACL-encrypted keyfiles cannot be fixed via ``get_keypair`` — 4.0.1
+        decrypts the envelope fine but then fails the SAME schema parse on the
+        embedded ``cryptoType``. Instead we use the low-level
+        ``decrypt_keyfile_data`` (returns raw plaintext bytes, no keypair
+        parse), strip the field, then re-encrypt with the same password so the
+        coldkey stays encrypted at rest. Idempotent: only rewrites when
+        ``cryptoType`` is actually present. Requires ``password`` (from
+        WALLET_PASSWORD) — without it the encrypted file is left untouched.
         """
         try:
             if not path.exists():
                 return
             raw = path.read_bytes()
             if raw[:1] == b"{":
-                # Unencrypted JSON
+                # Unencrypted JSON — strip in place.
                 data = json.loads(raw)
                 if "cryptoType" in data:
                     del data["cryptoType"]
                     path.write_text(json.dumps(data))
-            elif raw[:5] == b"$NACL" and password:
-                # Encrypted — decrypt via bittensor_wallet, strip, re-save plain
-                import bittensor_wallet as _bw
-                kf = _bw.Keyfile(str(path))
-                kp = kf.get_keypair(password=password)
-                kf.set_keypair(kp, encrypt=False, overwrite=True)
-                # Now the file is plain JSON — strip cryptoType if present
-                raw2 = path.read_bytes()
-                if raw2[:1] == b"{":
-                    data = json.loads(raw2)
-                    if "cryptoType" in data:
-                        del data["cryptoType"]
-                        path.write_text(json.dumps(data))
+                return
+            # Encrypted keyfile.
+            from bittensor_wallet.keyfile import (
+                keyfile_data_is_encrypted,
+                decrypt_keyfile_data,
+                encrypt_keyfile_data,
+            )
+            if not password or not keyfile_data_is_encrypted(raw):
+                return
+            plain = decrypt_keyfile_data(raw, password=password)
+            data = json.loads(plain)
+            if "cryptoType" not in data:
+                return  # already clean; nothing to rewrite
+            del data["cryptoType"]
+            # Back up the original blob once, then re-encrypt the cleaned JSON.
+            backup = path.with_name(path.name + ".bak")
+            if not backup.exists():
+                backup.write_bytes(raw)
+            new_enc = encrypt_keyfile_data(
+                json.dumps(data).encode(), password=password
+            )
+            path.write_bytes(new_enc)
         except Exception:
             pass
 
@@ -130,10 +146,21 @@ class TrajectoryMiner:
         if self._wallet is None:
             base = Path.home() / ".bittensor" / "wallets" / self.wallet_name
             self._sanitize_keyfile(base / "coldkey", self.wallet_password)
-            self._sanitize_keyfile(base / "hotkeys" / self.wallet_hotkey, self.wallet_password)
+            self._sanitize_keyfile(
+                base / "hotkeys" / self.wallet_hotkey, self.wallet_password
+            )
             self._wallet = bt.Wallet(
                 name=self.wallet_name, hotkey=self.wallet_hotkey
             )
+            # With WALLET_PASSWORD set, pre-seed the decrypt password so an
+            # encrypted coldkey unlocks without an interactive prompt.
+            if self.wallet_password:
+                try:
+                    self._wallet.coldkey_file.save_password_to_env(
+                        self.wallet_password
+                    )
+                except Exception:
+                    pass
         return self._wallet
 
     @property
