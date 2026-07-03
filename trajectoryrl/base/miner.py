@@ -91,18 +91,37 @@ class TrajectoryMiner:
         self._subtensor: Optional[bt.Subtensor] = None
 
     @staticmethod
-    def _sanitize_keyfile(path: Path) -> None:
-        """Strip cryptoType added by bittensor-wallet>=4.1.0 that 4.0.1 rejects."""
+    def _sanitize_keyfile(path: Path, password: Optional[str] = None) -> None:
+        """Strip cryptoType added by bittensor-wallet>=4.1.0 that 4.0.1 rejects.
+
+        For unencrypted JSON files: strips the field in-place.
+        For NACL-encrypted files: decrypts with bittensor_wallet (which supports
+        the newer format), strips cryptoType, then re-saves as plain JSON so
+        bittensor_wallet 4.0.1 can read it without a password prompt.
+        """
         try:
             if not path.exists():
                 return
             raw = path.read_bytes()
-            if raw[:1] != b"{":
-                return
-            data = json.loads(raw)
-            if "cryptoType" in data:
-                del data["cryptoType"]
-                path.write_text(json.dumps(data))
+            if raw[:1] == b"{":
+                # Unencrypted JSON
+                data = json.loads(raw)
+                if "cryptoType" in data:
+                    del data["cryptoType"]
+                    path.write_text(json.dumps(data))
+            elif raw[:5] == b"$NACL" and password:
+                # Encrypted — decrypt via bittensor_wallet, strip, re-save plain
+                import bittensor_wallet as _bw
+                kf = _bw.Keyfile(str(path))
+                kp = kf.get_keypair(password=password)
+                kf.set_keypair(kp, encrypt=False, overwrite=True)
+                # Now the file is plain JSON — strip cryptoType if present
+                raw2 = path.read_bytes()
+                if raw2[:1] == b"{":
+                    data = json.loads(raw2)
+                    if "cryptoType" in data:
+                        del data["cryptoType"]
+                        path.write_text(json.dumps(data))
         except Exception:
             pass
 
@@ -110,16 +129,11 @@ class TrajectoryMiner:
     def wallet(self) -> bt.Wallet:
         if self._wallet is None:
             base = Path.home() / ".bittensor" / "wallets" / self.wallet_name
-            self._sanitize_keyfile(base / "coldkey")
-            self._sanitize_keyfile(base / "hotkeys" / self.wallet_hotkey)
+            self._sanitize_keyfile(base / "coldkey", self.wallet_password)
+            self._sanitize_keyfile(base / "hotkeys" / self.wallet_hotkey, self.wallet_password)
             self._wallet = bt.Wallet(
                 name=self.wallet_name, hotkey=self.wallet_hotkey
             )
-            if self.wallet_password:
-                try:
-                    self._wallet.coldkey_file.save_password_to_env(self.wallet_password)
-                except Exception:
-                    pass
         return self._wallet
 
     @property
