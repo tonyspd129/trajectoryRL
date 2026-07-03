@@ -77,21 +77,49 @@ class TrajectoryMiner:
         wallet_hotkey: Optional[str] = None,
         netuid: Optional[int] = None,
         network: Optional[str] = None,
+        wallet_password: Optional[str] = None,
     ):
         self.wallet_name = wallet_name or os.environ.get("WALLET_NAME", "miner")
         self.wallet_hotkey = wallet_hotkey or os.environ.get("WALLET_HOTKEY", "default")
         self.netuid = netuid if netuid is not None else int(os.environ.get("NETUID", "11"))
         self.network = network or os.environ.get("NETWORK", "finney")
+        self.wallet_password: Optional[str] = (
+            wallet_password or os.environ.get("WALLET_PASSWORD")
+        )
 
         self._wallet: Optional[bt.Wallet] = None
         self._subtensor: Optional[bt.Subtensor] = None
 
+    @staticmethod
+    def _sanitize_keyfile(path: Path) -> None:
+        """Strip cryptoType added by bittensor-wallet>=4.1.0 that 4.0.1 rejects."""
+        try:
+            if not path.exists():
+                return
+            raw = path.read_bytes()
+            if raw[:1] != b"{":
+                return
+            data = json.loads(raw)
+            if "cryptoType" in data:
+                del data["cryptoType"]
+                path.write_text(json.dumps(data))
+        except Exception:
+            pass
+
     @property
     def wallet(self) -> bt.Wallet:
         if self._wallet is None:
+            base = Path.home() / ".bittensor" / "wallets" / self.wallet_name
+            self._sanitize_keyfile(base / "coldkey")
+            self._sanitize_keyfile(base / "hotkeys" / self.wallet_hotkey)
             self._wallet = bt.Wallet(
                 name=self.wallet_name, hotkey=self.wallet_hotkey
             )
+            if self.wallet_password:
+                try:
+                    self._wallet.coldkey_file.save_password_to_env(self.wallet_password)
+                except Exception:
+                    pass
         return self._wallet
 
     @property

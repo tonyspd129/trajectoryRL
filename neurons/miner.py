@@ -47,6 +47,7 @@ def _make_miner(config):
         wallet_hotkey=config.wallet_hotkey,
         netuid=config.netuid,
         network=config.network,
+        wallet_password=getattr(config, "wallet_password", None),
     )
 
 

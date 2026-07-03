@@ -373,6 +373,7 @@ class MinerConfig:
 
     wallet_name: str = "miner"
     wallet_hotkey: str = "default"
+    wallet_password: Optional[str] = None
     netuid: int = 11
     network: str = "finney"
 
@@ -403,6 +404,7 @@ class MinerConfig:
         return cls(
             wallet_name=os.getenv("WALLET_NAME", "miner"),
             wallet_hotkey=os.getenv("WALLET_HOTKEY", "default"),
+            wallet_password=os.getenv("WALLET_PASSWORD") or None,
             netuid=int(os.getenv("NETUID", "11")),
             network=os.getenv("NETWORK", "finney"),
             log_level=os.getenv("LOG_LEVEL", "INFO"),
