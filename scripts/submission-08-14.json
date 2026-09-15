@@ -1,0 +1,9 @@
+{
+  "password": "alpha1234",
+  "items": [
+    { "wallet": "tony11-6", "hotkey": "tony1", "pack": "room/packs/v28/31.json" },
+    { "wallet": "tony11-6", "hotkey": "tony2", "pack": "room/packs/v28/32.json" },
+    { "wallet": "tony11-16", "hotkey": "tony", "pack": "room/packs/v28/41.json" },
+    { "wallet": "tony11-16", "hotkey": "tony1", "pack": "room/packs/v28/42.json" }
+  ]
+}

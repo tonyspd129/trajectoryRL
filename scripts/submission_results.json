@@ -1,0 +1,406 @@
+{
+  "burned": [
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk36",
+      "receipt": [
+        8990701,
+        14
+      ],
+      "packkey": "/home/chuck/Documents/BT/11/room/packs/v30/1.json",
+      "source": "burn 8990701-14"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk37",
+      "receipt": [
+        8990703,
+        25
+      ],
+      "packkey": "/home/chuck/Documents/BT/11/room/packs/v30/2.json",
+      "source": "burn 8990703-25"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk38",
+      "receipt": [
+        8990705,
+        13
+      ],
+      "packkey": "/home/chuck/Documents/BT/11/room/packs/v30/3.json",
+      "source": "burn 8990705-13"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk39",
+      "receipt": [
+        8990707,
+        18
+      ],
+      "packkey": "/home/chuck/Documents/BT/11/room/packs/v30/4.json",
+      "source": "burn 8990707-18"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk40",
+      "receipt": [
+        8990709,
+        10
+      ],
+      "packkey": "/home/chuck/Documents/BT/11/room/packs/v30/5.json",
+      "source": "burn 8990709-10"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk41",
+      "receipt": [
+        8990711,
+        27
+      ],
+      "packkey": "/home/chuck/Documents/BT/11/room/packs/v30/6.json",
+      "source": "burn 8990711-27"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk42",
+      "receipt": [
+        8990713,
+        13
+      ],
+      "packkey": "/home/chuck/Documents/BT/11/room/packs/v30/7.json",
+      "source": "burn 8990713-13"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk43",
+      "receipt": [
+        8990717,
+        6
+      ],
+      "packkey": "/home/chuck/Documents/BT/11/room/packs/v30/8.json",
+      "source": "burn 8990717-6"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk44",
+      "receipt": [
+        8990719,
+        27
+      ],
+      "packkey": "/home/chuck/Documents/BT/11/room/packs/v30/9.json",
+      "source": "burn 8990719-27"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk45",
+      "receipt": [
+        8990722,
+        8
+      ],
+      "packkey": "/home/chuck/Documents/BT/11/room/packs/v30/10.json",
+      "source": "burn 8990722-8"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk46",
+      "receipt": [
+        8990724,
+        16
+      ],
+      "packkey": "/home/chuck/Documents/BT/11/room/packs/v30/11.json",
+      "source": "burn 8990724-16"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk47",
+      "receipt": [
+        8990726,
+        22
+      ],
+      "packkey": "/home/chuck/Documents/BT/11/room/packs/v30/12.json",
+      "source": "burn 8990726-22"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk48",
+      "receipt": [
+        8990728,
+        21
+      ],
+      "packkey": "/home/chuck/Documents/BT/11/room/packs/v30/13.json",
+      "source": "burn 8990728-21"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk49",
+      "receipt": [
+        8990730,
+        14
+      ],
+      "packkey": "/home/chuck/Documents/BT/11/room/packs/v30/14.json",
+      "source": "burn 8990730-14"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk50",
+      "receipt": [
+        8990732,
+        26
+      ],
+      "packkey": "/home/chuck/Documents/BT/11/room/packs/v30/15.json",
+      "source": "burn 8990732-26"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk51",
+      "receipt": [
+        8990735,
+        16
+      ],
+      "packkey": "/home/chuck/Documents/BT/11/room/packs/v30/16.json",
+      "source": "burn 8990735-16"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk52",
+      "receipt": [
+        8990737,
+        11
+      ],
+      "packkey": "/home/chuck/Documents/BT/11/room/packs/v30/17.json",
+      "source": "burn 8990737-11"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk53",
+      "receipt": [
+        8990740,
+        7
+      ],
+      "packkey": "/home/chuck/Documents/BT/11/room/packs/v30/18.json",
+      "source": "burn 8990740-7"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk54",
+      "receipt": [
+        8990742,
+        11
+      ],
+      "packkey": "/home/chuck/Documents/BT/11/room/packs/v30/19.json",
+      "source": "burn 8990742-11"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk55",
+      "receipt": [
+        8990744,
+        19
+      ],
+      "packkey": "/home/chuck/Documents/BT/11/room/packs/v30/20.json",
+      "source": "burn 8990744-19"
+    }
+  ],
+  "submitted": [
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk38",
+      "ok": true,
+      "source": "burn 8990705-13",
+      "pack": "3.json",
+      "submission_id": "8058428",
+      "pack_hash": "efb013d32c3de86c6c4f4a20db9b2297fee206a46082b89a7eebaa08398807da",
+      "pre_eval": "pending"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk36",
+      "ok": true,
+      "source": "burn 8990701-14",
+      "pack": "1.json",
+      "submission_id": "8058430",
+      "pack_hash": "9f7dd0e2be0bc00236be05dac37a7c70116e2e7a12e1d64abeaa2665c42044f2",
+      "pre_eval": "pending"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk39",
+      "ok": true,
+      "source": "burn 8990707-18",
+      "pack": "4.json",
+      "submission_id": "8058435",
+      "pack_hash": "189b68b6e90eb581d9a913cbbebd96303437a833b3ba1a27fc84e61fd9ff7180",
+      "pre_eval": "pending"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk40",
+      "ok": true,
+      "source": "burn 8990709-10",
+      "pack": "5.json",
+      "submission_id": "8058429",
+      "pack_hash": "7ea2bf0234b93c2d68df3587e97fdfdabfed6ba65ebdf721823db586c0faf4e3",
+      "pre_eval": "pending"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk42",
+      "ok": true,
+      "source": "burn 8990713-13",
+      "pack": "7.json",
+      "submission_id": "8058431",
+      "pack_hash": "f034b6e8b0571ff5ba41c3f4d6290b3488d14135ddb8c5ae09fb9fec478da8f5",
+      "pre_eval": "pending"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk37",
+      "ok": true,
+      "source": "burn 8990703-25",
+      "pack": "2.json",
+      "submission_id": "8058432",
+      "pack_hash": "11d3e4c1a5ac65b66b98f9123150b1a9f2921902debc3d10f1194c1a4486cd97",
+      "pre_eval": "pending"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk41",
+      "ok": true,
+      "source": "burn 8990711-27",
+      "pack": "6.json",
+      "submission_id": "8058434",
+      "pack_hash": "7e3281d728bdd16ed9dcfdc1fd25f3e5890d9e62fe2902fec1e1ef75484c3bd2",
+      "pre_eval": "pending"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk43",
+      "ok": true,
+      "source": "burn 8990717-6",
+      "pack": "8.json",
+      "submission_id": "8058433",
+      "pack_hash": "95940fd6dffaae0dec14dbb07c9669a4dcbc1ec9fdd67ccbb0cb2fd8d8ecde45",
+      "pre_eval": "pending"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk44",
+      "ok": true,
+      "source": "burn 8990719-27",
+      "pack": "9.json",
+      "submission_id": "8058436",
+      "pack_hash": "7a362b834dc32da01ec8d36dfbb4b23baed9bcdd10375f90deacde92fdff53be",
+      "pre_eval": "pending"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk50",
+      "ok": true,
+      "source": "burn 8990732-26",
+      "pack": "15.json",
+      "submission_id": "8058437",
+      "pack_hash": "2513fb2c40ec69332f13540b8aa63d9aaa737add590afa88277920a8402b7e21",
+      "pre_eval": "pending"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk49",
+      "ok": true,
+      "source": "burn 8990730-14",
+      "pack": "14.json",
+      "submission_id": "8058439",
+      "pack_hash": "79a0aaf7375b5dce1765d2b6674cee0fbf9928ddbd5f410aeb5ae998ce79a581",
+      "pre_eval": "pending"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk51",
+      "ok": true,
+      "source": "burn 8990735-16",
+      "pack": "16.json",
+      "submission_id": "8058442",
+      "pack_hash": "94763105905cd073fbb346351a98e51e62e38ce722c20d534538ff9eb14ae714",
+      "pre_eval": "pending"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk47",
+      "ok": true,
+      "source": "burn 8990726-22",
+      "pack": "12.json",
+      "submission_id": "8058440",
+      "pack_hash": "7d89d825ac4284fc57746dc18dea1744702ef44d692c6d3e72e5131fa066b5c0",
+      "pre_eval": "pending"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk45",
+      "ok": true,
+      "source": "burn 8990722-8",
+      "pack": "10.json",
+      "submission_id": "8058438",
+      "pack_hash": "ab8ed92b02b2bfb9bf2506d017b1ce2dfd8cde1d9a531d906df5f6a309d57a9c",
+      "pre_eval": "pending"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk48",
+      "ok": true,
+      "source": "burn 8990728-21",
+      "pack": "13.json",
+      "submission_id": "8058441",
+      "pack_hash": "b362ad041b33e99339ac78c793bc6a0236b86a5f766288e4a21515257d24e2c9",
+      "pre_eval": "pending"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk46",
+      "ok": true,
+      "source": "burn 8990724-16",
+      "pack": "11.json",
+      "submission_id": "8058443",
+      "pack_hash": "c996f4451aff2dd7c4d6e00f9b52234d7b7f24a5b6560d99e9813acddfdc756a",
+      "pre_eval": "pending"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk53",
+      "ok": true,
+      "source": "burn 8990740-7",
+      "pack": "18.json",
+      "submission_id": "8058444",
+      "pack_hash": "e92f33ab2e284248343a8bf6be56b319d70b2b2f97da8614944a0738bf41a153",
+      "pre_eval": "pending"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk55",
+      "ok": true,
+      "source": "burn 8990744-19",
+      "pack": "20.json",
+      "submission_id": "8058445",
+      "pack_hash": "f589ee8c6d7f3f061fd7e29e38cd7736e03d3d298e010a11fad95b7c7a7e40f4",
+      "pre_eval": "pending"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk52",
+      "ok": true,
+      "source": "burn 8990737-11",
+      "pack": "17.json",
+      "submission_id": "8058446",
+      "pack_hash": "183a8288384afddb3318d1085253d6618b6a5c8d6a351a056be100e8b99b5e45",
+      "pre_eval": "pending"
+    },
+    {
+      "wallet": "tony11-9",
+      "hotkey": "sn11-hk54",
+      "ok": true,
+      "source": "burn 8990742-11",
+      "pack": "19.json",
+      "submission_id": "8058447",
+      "pack_hash": "0fa332a9f780428261ded2afce7b0bb88590460211c9055652cc5a05842e93de",
+      "pre_eval": "pending"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "password": "alpha1234",
+  "target_alpha": 50,
+  "buffer_pct": 2,
+  "netuid": 11,
+  "max_workers": 8,
+  "coldkeys": ["tony11-3", "tony11-15", "tony11-16"]
+}

@@ -1,0 +1,25 @@
+{
+  "password": "alpha1234",
+  "items": [
+    { "wallet": "tony11-9", "hotkey": "sn11-hk36", "pack": "room/packs/v30/1.json" },
+    { "wallet": "tony11-9", "hotkey": "sn11-hk37", "pack": "room/packs/v30/2.json" },
+    { "wallet": "tony11-9", "hotkey": "sn11-hk38", "pack": "room/packs/v30/3.json" },
+    { "wallet": "tony11-9", "hotkey": "sn11-hk39", "pack": "room/packs/v30/4.json" },
+    { "wallet": "tony11-9", "hotkey": "sn11-hk40", "pack": "room/packs/v30/5.json" },
+    { "wallet": "tony11-9", "hotkey": "sn11-hk41", "pack": "room/packs/v30/6.json" },
+    { "wallet": "tony11-9", "hotkey": "sn11-hk42", "pack": "room/packs/v30/7.json" },
+    { "wallet": "tony11-9", "hotkey": "sn11-hk43", "pack": "room/packs/v30/8.json" },
+    { "wallet": "tony11-9", "hotkey": "sn11-hk44", "pack": "room/packs/v30/9.json" },
+    { "wallet": "tony11-9", "hotkey": "sn11-hk45", "pack": "room/packs/v30/10.json" },
+    { "wallet": "tony11-9", "hotkey": "sn11-hk46", "pack": "room/packs/v30/11.json" },
+    { "wallet": "tony11-9", "hotkey": "sn11-hk47", "pack": "room/packs/v30/12.json" },
+    { "wallet": "tony11-9", "hotkey": "sn11-hk48", "pack": "room/packs/v30/13.json" },
+    { "wallet": "tony11-9", "hotkey": "sn11-hk49", "pack": "room/packs/v30/14.json" },
+    { "wallet": "tony11-9", "hotkey": "sn11-hk50", "pack": "room/packs/v30/15.json" },
+    { "wallet": "tony11-9", "hotkey": "sn11-hk51", "pack": "room/packs/v30/16.json" },
+    { "wallet": "tony11-9", "hotkey": "sn11-hk52", "pack": "room/packs/v30/17.json" },
+    { "wallet": "tony11-9", "hotkey": "sn11-hk53", "pack": "room/packs/v30/18.json" },
+    { "wallet": "tony11-9", "hotkey": "sn11-hk54", "pack": "room/packs/v30/19.json" },
+    { "wallet": "tony11-9", "hotkey": "sn11-hk55", "pack": "room/packs/v30/20.json" }
+  ]
+}

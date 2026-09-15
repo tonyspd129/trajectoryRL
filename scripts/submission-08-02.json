@@ -1,0 +1,155 @@
+{
+  "password": "alpha1234",
+  "items": [
+    {
+      "wallet": "tony11-7",
+      "hotkey": "tony1",
+      "pack": "room/packs/v27/60.json"
+    },
+    {
+      "wallet": "tony11-7",
+      "hotkey": "tony2",
+      "pack": "room/packs/v27/61.json"
+    },
+    {
+      "wallet": "tony11-7",
+      "hotkey": "tony3",
+      "pack": "room/packs/v27/62.json"
+    },
+    {
+      "wallet": "tony11-7",
+      "hotkey": "tony4",
+      "pack": "room/packs/v27/63.json"
+    },
+    {
+      "wallet": "tony11-7",
+      "hotkey": "tony5",
+      "pack": "room/packs/v27/64.json"
+    },
+    {
+      "wallet": "tony11-7",
+      "hotkey": "tony6",
+      "pack": "room/packs/v27/65.json"
+    },
+    {
+      "wallet": "tony11-7",
+      "hotkey": "tony7",
+      "pack": "room/packs/v27/66.json"
+    },
+    {
+      "wallet": "tony11-7",
+      "hotkey": "tony8",
+      "pack": "room/packs/v27/67.json"
+    },
+    {
+      "wallet": "tony11-7",
+      "hotkey": "tony9",
+      "pack": "room/packs/v27/68.json"
+    },
+    {
+      "wallet": "tony11-7",
+      "hotkey": "tony10",
+      "pack": "room/packs/v27/69.json"
+    },
+    {
+      "wallet": "tony11-7",
+      "hotkey": "tony11",
+      "pack": "room/packs/v27/70.json"
+    },
+    {
+      "wallet": "tony11-7",
+      "hotkey": "tony12",
+      "pack": "room/packs/v27/71.json"
+    },
+    {
+      "wallet": "tony11-7",
+      "hotkey": "tony13",
+      "pack": "room/packs/v27/72.json"
+    },
+    {
+      "wallet": "tony11-7",
+      "hotkey": "tony14",
+      "pack": "room/packs/v27/73.json"
+    },
+    {
+      "wallet": "tony11-7",
+      "hotkey": "tony15",
+      "pack": "room/packs/v27/74.json"
+    },
+    {
+      "wallet": "tony11-8",
+      "hotkey": "tony1",
+      "pack": "room/packs/v27/75.json"
+    },
+    {
+      "wallet": "tony11-8",
+      "hotkey": "tony2",
+      "pack": "room/packs/v27/76.json"
+    },
+    {
+      "wallet": "tony11-8",
+      "hotkey": "tony3",
+      "pack": "room/packs/v27/77.json"
+    },
+    {
+      "wallet": "tony11-8",
+      "hotkey": "tony4",
+      "pack": "room/packs/v27/78.json"
+    },
+    {
+      "wallet": "tony11-8",
+      "hotkey": "tony5",
+      "pack": "room/packs/v27/79.json"
+    },
+    {
+      "wallet": "tony11-8",
+      "hotkey": "tony6",
+      "pack": "room/packs/v27/80.json"
+    },
+    {
+      "wallet": "tony11-8",
+      "hotkey": "tony7",
+      "pack": "room/packs/v27/81.json"
+    },
+    {
+      "wallet": "tony11-8",
+      "hotkey": "tony8",
+      "pack": "room/packs/v27/82.json"
+    },
+    {
+      "wallet": "tony11-8",
+      "hotkey": "tony9",
+      "pack": "room/packs/v27/83.json"
+    },
+    {
+      "wallet": "tony11-8",
+      "hotkey": "tony10",
+      "pack": "room/packs/v27/84.json"
+    },
+    {
+      "wallet": "tony11-8",
+      "hotkey": "tony11",
+      "pack": "room/packs/v27/85.json"
+    },
+    {
+      "wallet": "tony11-8",
+      "hotkey": "tony12",
+      "pack": "room/packs/v27/86.json"
+    },
+    {
+      "wallet": "tony11-8",
+      "hotkey": "tony13",
+      "pack": "room/packs/v27/87.json"
+    },
+    {
+      "wallet": "tony11-8",
+      "hotkey": "tony14",
+      "pack": "room/packs/v27/88.json"
+    },
+    {
+      "wallet": "tony11-8",
+      "hotkey": "tony15",
+      "pack": "room/packs/v27/89.json"
+    }
+  ]
+}

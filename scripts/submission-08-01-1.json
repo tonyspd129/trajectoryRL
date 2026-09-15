@@ -1,0 +1,55 @@
+{
+  "password": "alpha1234",
+  "items": [
+    {
+      "wallet": "tony11-6",
+      "hotkey": "tony1",
+      "pack": "room/packs/v27/50.json"
+    },
+    {
+      "wallet": "tony11-6",
+      "hotkey": "tony2",
+      "pack": "room/packs/v27/51.json"
+    },
+    {
+      "wallet": "tony11-6",
+      "hotkey": "tony3",
+      "pack": "room/packs/v27/52.json"
+    },
+    {
+      "wallet": "tony11-6",
+      "hotkey": "tony4",
+      "pack": "room/packs/v27/53.json"
+    },
+    {
+      "wallet": "tony11-6",
+      "hotkey": "tony5",
+      "pack": "room/packs/v27/54.json"
+    },
+    {
+      "wallet": "tony11-6",
+      "hotkey": "tony6",
+      "pack": "room/packs/v27/55.json"
+    },
+    {
+      "wallet": "tony11-6",
+      "hotkey": "tony7",
+      "pack": "room/packs/v27/56.json"
+    },
+    {
+      "wallet": "tony11-6",
+      "hotkey": "tony8",
+      "pack": "room/packs/v27/57.json"
+    },
+    {
+      "wallet": "tony11-6",
+      "hotkey": "tony9",
+      "pack": "room/packs/v27/58.json"
+    },
+    {
+      "wallet": "tony11-6",
+      "hotkey": "tony10",
+      "pack": "room/packs/v27/59.json"
+    }
+  ]
+}
