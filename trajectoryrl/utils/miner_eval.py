@@ -27,6 +27,7 @@ import logging
 from dataclasses import dataclass
 from typing import Callable, Dict, Optional, Sequence
 
+from ..policy import extract_policy_files, scan_policy_files
 from .commitments import MinerCommitment
 from .github import PackFetcher
 from .sandbox_harness import (
@@ -162,9 +163,23 @@ async def evaluate_miner_s1(
             skip_reason=SKIP_MISSING_SKILL_MD,
         )
 
-    extra_files = [f for f in files if f != "SKILL.md"]
-    if extra_files:
-        log.warning("S1 pack contains unexpected files: %s", extra_files)
+    # Season 2: every file other than SKILL.md is part of the routing policy
+    # (policy.py / policy.json + helpers) and goes to the policy sidecar. A
+    # SKILL.md-only pack runs the default pin policy on the locked testee.
+    try:
+        policy_files = extract_policy_files(pack)
+    except ValueError as e:
+        log.warning("Invalid policy files: %s", e)
+        return MinerEvalOutcome(
+            success=False,
+            skip_reason=SKIP_INVALID_PACK,
+            skip_detail=str(e),
+        )
+    log.info("Policy files: %s", sorted(policy_files) or "<none: default pin policy>")
+    policy_scan = scan_policy_files(policy_files, scenarios or harness.sandbox_scenarios) if policy_files else {}
+    if policy_scan.get("scenario_hits"):
+        log.warning("Policy files name %d active scenarios verbatim: %s (shadow signal, not scored)",
+                    policy_scan["scenario_hits"], policy_scan["scenario_names"])
 
     skill_md = files.get("SKILL.md")
     if not isinstance(skill_md, str) or not skill_md.strip():
@@ -194,6 +209,7 @@ async def evaluate_miner_s1(
             on_episode_done=on_episode_done,
             is_epoch_still_current=is_epoch_still_current,
             scenarios=scenarios,
+            policy_files=policy_files,
         )
     except Exception as e:
         log.error("S1 evaluation failed: %s", e, exc_info=True)
@@ -266,12 +282,23 @@ async def evaluate_miner_s1(
     for scenario in result.scenarios:
         quality = float(result.scenario_qualities.get(scenario, 0.0))
         cost = result.scenario_costs_usd.get(scenario)
+        ep = next((e for e in result.session_result.episodes if e.scenario == scenario), None)
+        meter = (ep.meter if ep is not None else {}) or {}
         judge_details[scenario] = {
             "overall_score": round(quality, 4),
             "qualification_gate": quality > 0.0,
             "cost_usd": round(cost, 6) if cost is not None else None,
             "harness": "trajrl-bench",
             "sandbox_version": harness.sandbox_version,
+            # Season 2: per-model cost, meter counters and the shadow
+            # provenance result travel with the score (not scored).
+            "cost_by_model": dict(ep.cost_by_model) if ep is not None else {},
+            "meter_calls": meter.get("calls"),
+            "meter_refused": (meter.get("refused_cap") or 0) + (meter.get("refused_model") or 0),
+            "provenance": meter.get("provenance"),
+            "policy_setup_s": ep.policy_setup_s if ep is not None else None,
+            "policy_stalled": bool(getattr(ep, "policy_stalled", False)) if ep is not None else None,
+            "policy_scan": policy_scan or None,
         }
 
     return MinerEvalOutcome(

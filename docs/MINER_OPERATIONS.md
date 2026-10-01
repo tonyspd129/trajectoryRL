@@ -9,11 +9,11 @@
 
 ## What Is Mining on TrajectoryRL?
 
-Mining means writing a **SKILL.md** — a scaffold that teaches a small open-source LLM how to solve scenario tasks across domains (coding, sysadmin, file ops, debugging — mostly adapted from [Terminal-Bench](https://github.com/laude-institute/terminal-bench)). You're not running GPU workloads or a long-running daemon. You're doing agent instruction engineering.
+Mining means shipping a **fusion policy** next to your `SKILL.md`: a program that decides, per request, which open-weight models on Engy answer the agent and in what combination (see [FUSION_POLICY.md](FUSION_POLICY.md)). Scenarios span coding, sysadmin, file ops and debugging, mostly adapted from [Terminal-Bench](https://github.com/laude-institute/terminal-bench). You're not running GPU workloads or a long-running daemon.
 
-For each scenario, validators run the testee LLM (default: `qwen/qwen3.8-27b`) in a fresh container with your `SKILL.md` and the scenario's `INSTRUCTION.md`. The agent produces a deliverable file. A separate verifier container runs `pytest` against the deliverable and emits `passed/total` from a continuous CTRF report. Your pack's score is `Σ passed_i / total_i` across all active scenarios — range `[0, N]` for `N` scenarios.
+For each scenario, validators run the Hermes agent in a fresh container with your `SKILL.md` and the scenario's `INSTRUCTION.md`, talking to your policy in a sidecar; the policy's model calls go through the validator's meter. The agent produces a deliverable file. A separate verifier container runs `pytest` against the deliverable and emits `passed/total` from a continuous CTRF report. Your pack's score is `Σ passed_i / total_i` across all active scenarios — range `[0, N]` for `N` scenarios.
 
-The miner CLI (`trajectoryrl-miner`) is a **toolbox**: independent commands you compose however you want. Write your SKILL.md (manually, with an LLM, with your own automation), then use the CLI to build and submit via the web endpoint.
+The miner CLI (`trajectoryrl-miner`) is a **toolbox**: independent commands you compose however you want. Write your SKILL.md and your policy (manually, with an LLM, with your own automation), then use the CLI to build and submit via the web endpoint.
 
 ---
 
@@ -42,6 +42,9 @@ vim SKILL.md
 # 2. Build pack
 trajectoryrl-miner build SKILL.md -o pack.json
 
+# Season 2: add your fusion policy directory (policy.py or policy.json + helper files)
+trajectoryrl-miner build SKILL.md --policy ./my_policy -o pack.json
+
 # 3. Pay the submission fee and submit.
 #    The CLI recycles SUBMISSION_FEE_ALPHA (default 50 α) on-chain via
 #    recycle_alpha, then POSTs the pack + recycle receipt to the platform.
@@ -57,7 +60,7 @@ Then check status:
 trajectoryrl-miner status
 ```
 
-That's it. Repeat whenever you improve your SKILL.md.
+That's it. Repeat whenever you improve your pack.
 
 > The CLI is also runnable as `python neurons/miner.py <command>` if you'd rather not install the entry point. Behaviour is identical.
 
@@ -78,7 +81,7 @@ The `web-submit` command:
 2. POSTs the pack content + receipt to `POST /api/v2/miners/submit`, signed with your hotkey.
 3. The server verifies the signature, pack format, hash, recycle receipt, and then kicks off pre-eval asynchronously — no follow-up `set_commitment` needed.
 
-The platform queues the pack for the next eligible challenger epoch on its own. Pack URLs are not exposed in any other API for **48 hours** (the "reveal gate"), so a competitor can't scrape the dashboard to harvest your fresh SKILL.md.
+The platform queues the pack for the next eligible challenger epoch on its own. Pack URLs are not exposed in any other API for **48 hours** (the "reveal gate"), so a competitor can't scrape the dashboard to harvest your fresh pack.
 
 Full request/response spec for `/api/v2/miners/submit` is in [`trajectoryrl.web/API.md`](https://github.com/trajectoryRL/trajectoryrl.web/blob/main/API.md).
 
@@ -96,7 +99,7 @@ Every submission must be backed by an on-chain `recycle_alpha` burn. Recycling i
 ## CLI Reference
 
 ```bash
-trajectoryrl-miner build       <skill_md_path> [-o pack.json]
+trajectoryrl-miner build       <skill_md_path> [--policy DIR] [-o pack.json]
 trajectoryrl-miner validate    <pack.json>
 trajectoryrl-miner web-submit  <pack.json> [--api-base-url ...]
 trajectoryrl-miner status
@@ -106,7 +109,7 @@ trajectoryrl-miner submit      <pack_url>                                       
 
 ### build
 
-Build a pack from a SKILL.md file.
+Build a pack from a SKILL.md file and, with `--policy DIR`, the policy files in that directory (`policy.py` or `policy.json` plus helper text files; `.pyc` and `__pycache__` skipped, binary files rejected).
 
 ```bash
 trajectoryrl-miner build ./SKILL.md -o pack.json

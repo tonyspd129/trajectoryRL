@@ -154,6 +154,13 @@ class TrajectoryValidator:
         self._last_set_weights_at: Optional[int] = None
         self._last_eval_at: Optional[int] = None
 
+        # Self-reported health. None = healthy. Set when a session is
+        # discarded because the validator itself is broken, cleared when a
+        # score posts. Without it a validator can heartbeat green for days
+        # while scoring nothing (SN11 uid 74, 2026-09-21): the operator's
+        # only clue was `last_eval_at` quietly going stale.
+        self._health_issue: Optional[str] = None
+
         # Tempo gate: which block we last attempted set_weights at
         self._last_set_weights_block: int = 0
 
@@ -355,8 +362,9 @@ class TrajectoryValidator:
                     bench_image_hash=self._sandbox_harness.bench_image_hash,
                     harness_image_hash=self._sandbox_harness.scenario_image_hash,
                     bench_version=self._sandbox_harness.sandbox_version,
-                    llm_model=self.config.llm_model,
+                    llm_model=f"policy:auto (default {self.config.llm_model})",
                     llm_base_url=self.config.llm_base_url,
+                    health_issue=self._health_issue,
                 )
             except Exception as e:
                 logger.warning("Heartbeat error: %s", e)
@@ -850,7 +858,7 @@ class TrajectoryValidator:
                 spec_number=eval_spec,
                 harness_name=self._sandbox_harness.harness_name,
                 harness_version=self._sandbox_harness.harness_version,
-                llm_model=self.config.llm_model,
+                llm_model=f"policy:auto (default {self.config.llm_model})",
             )
             asyncio.run_coroutine_threadsafe(coro, loop)
 
@@ -1143,6 +1151,11 @@ class TrajectoryValidator:
                 "LLM key/credits/network. No score submitted.",
                 challenge_epoch_id,
             )
+            self._health_issue = (
+                f"infra: every scenario failed with no billed model call "
+                f"(epoch {challenge_epoch_id}); check the Engy key, credits, "
+                f"network, and the policy sidecar's route to the meter"
+            )
             return
 
         rejected = False
@@ -1174,7 +1187,7 @@ class TrajectoryValidator:
             scenario_results=scenario_results or None,
             spec_number=eval_spec,
             llm_base_url=self.config.llm_base_url,
-            llm_model=self.config.llm_model,
+            llm_model=f"policy:auto (default {self.config.llm_model})",
             judge_model=self.config.judge_model or None,
             **self._harness_metadata(),
         )
@@ -1182,6 +1195,7 @@ class TrajectoryValidator:
         if ok:
             self._last_scored_challenge_epoch_id = challenge_epoch_id
             self._last_eval_at = int(time.time())
+            self._health_issue = None      # a posted score clears the alarm
             self._save_eval_state()
 
         # Fire-and-forget log uploads

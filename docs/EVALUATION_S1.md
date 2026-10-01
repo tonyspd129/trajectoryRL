@@ -1,10 +1,16 @@
 # Scoring & Evaluation
 
+> **Season 2 (transition season, SPEC 25) is live.** Miners now submit a **fusion policy** next to their
+> SKILL.md; the validator runs it in a sidecar and it decides which Engy models answer each request. Scoring is
+> unchanged. Read [FUSION_POLICY.md](FUSION_POLICY.md) first; this document describes the Season 1 mechanics
+> that Season 2 reuses. SN11's next stage after the transition is RSI infrastructure.
+
+
 **Applies to**: Season 1 (Self-Learning Agents)
 
-**Version**: 2.0
+**Version**: 3.0 (Season 2, SPEC 25)
 
-**Date**: 2026-05-14
+**Date**: 2026-09-19
 
 **Parent document**: [INCENTIVE_MECHANISM.md](INCENTIVE_MECHANISM.md)
 
@@ -57,7 +63,7 @@ mean_quality  = final_score / N              (∈ [0, 1], convenience aggregate)
 
 Consensus uses `final_score`; `mean_quality` is reported alongside for human readability.
 
-**Cost** (USD, summed from per-turn cost in Hermes's `turns.jsonl`) is reported per scenario and per session but **never folded into the score** — it's a separate axis on the leaderboard.
+**Cost** (USD at the frozen SPEC price table, from the validator's meter over every model call the policy made) is reported per scenario, per model and per session but **never folded into the score** in this spec; a $1 per-scenario safety cap bounds spending.
 
 No learning bonus, no split-half delta, no early-mean floor. With one episode per scenario the within-scenario delta concept doesn't apply.
 
@@ -101,7 +107,8 @@ A `pack.json` is a JSON object containing the files needed to evaluate the SKILL
 {
   "schema_version": 1,
   "files": {
-    "SKILL.md": "# Domain Knowledge\n..."
+    "SKILL.md": "# Domain Knowledge\n...",
+    "policy.json": "{\"kind\": \"pin\", \"model\": \"glm-5.3-flash\"}"
   }
 }
 ```
@@ -109,7 +116,7 @@ A `pack.json` is a JSON object containing the files needed to evaluate the SKILL
 | Field | Type | Required | Description |
 |-------|------|:--------:|-------------|
 | `schema_version` | int | Yes | Must be `1` |
-| `files` | dict | Yes | Filename → content string. **Must include `SKILL.md`** |
+| `files` | dict | Yes | Filename → content string. **Must include `SKILL.md`**. Season 2: every other file is a policy file (`policy.py` or `policy.json` plus helper text files), copied into the policy sidecar. A pack with only `SKILL.md` runs the default pin policy on qwen3.8-27b. |
 
 ### Validation rules
 
@@ -200,6 +207,6 @@ Packs failing schema or size validation receive **weight = 0**. Packs failing in
 
 ---
 
-**Version**: 2.0
+**Version**: 3.0 (Season 2, SPEC 25)
 
-**Date**: 2026-05-14
+**Date**: 2026-09-19

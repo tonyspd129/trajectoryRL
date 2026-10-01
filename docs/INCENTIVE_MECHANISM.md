@@ -21,7 +21,7 @@ The core loop:
 5. **Winner Protection**: A challenger replaces the seated winner only if it qualifies and clears the takeover bar — from spec 16, a **score-dependent multiplicative margin δ(s)**: 3% across the normal range, decaying linearly to zero as the defended score approaches the score ceiling; before, a flat multiplicative `δ = 3%`. The bar also **time-decays with the seat's age** (grace → premium fades → bar continues *below* the real score to a fixed −3% handicap at ~3 days) so a camped seat becomes progressively easier to take, and a fully-aged seat can be taken by a challenger scoring up to 3% under the incumbent; see Winner Protection below.
 6. **Weight Setting**: Validators read the canonical winner from the platform and call `set_weights` every tempo. The seated winner takes 100% of miner alpha; when no seat exists (cold start, deregistered or banned winner) weight is set to the subnet owner UID and the chain burns the emission.
 
-For the current season's scoring method, pack schema, and evaluation specifics, see [SCORING_AND_EVALUATION.md](SCORING_AND_EVALUATION.md).
+For the current season's scoring method, pack schema, and evaluation specifics, see [EVALUATION_S1.md](EVALUATION_S1.md); for Season 2's competition object (fusion policies) see [FUSION_POLICY.md](FUSION_POLICY.md).
 
 > **v6.0 architectural change**: The validator consensus is now coordinated by the platform server rather than reached via an off-chain CAS protocol. Each challenge epoch evaluates exactly one challenger pack, replacing the previous all-miners-every-window cycle. See [Migration from v5.2](#migration-from-v52) and [Validator Consensus](#validator-consensus).
 

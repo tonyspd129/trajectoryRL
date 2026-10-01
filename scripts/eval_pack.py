@@ -42,6 +42,7 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
+from trajectoryrl.policy import extract_policy_files
 from trajectoryrl.utils.config import SPEC_NUMBER, ValidatorConfig
 from trajectoryrl.utils.sandbox_harness import (
     SandboxEvaluationResult,
@@ -179,11 +180,10 @@ async def run_evaluation(args) -> int:
         logger.error("Pack missing or empty SKILL.md")
         return 1
 
-    extra_files = [
-        f for f in pack.get("files", {}) if f.lower() != "skill.md"
-    ]
-    if extra_files:
-        logger.warning("S1 pack contains unexpected files: %s", extra_files)
+    # Season 2: files other than SKILL.md form the routing policy and run in
+    # the policy sidecar (policy.py / policy.json + helpers).
+    policy_files = extract_policy_files(pack)
+    logger.info("Policy files: %s", sorted(policy_files) or "<none: default pin policy>")
 
     logger.info("SKILL.md: %d chars", len(skill_md))
 
@@ -219,6 +219,11 @@ async def run_evaluation(args) -> int:
             epoch_seed=epoch_seed,
             pack_hash=pack_hash,
             validator_salt=validator_salt,
+            policy_files=policy_files,
+            scenarios=(
+                [x.strip() for x in args.scenarios.split(",") if x.strip()]
+                if getattr(args, "scenarios", None) else None
+            ),
         )
     except Exception as e:
         logger.error("S1 evaluation failed: %s", e, exc_info=True)
@@ -267,7 +272,7 @@ async def run_evaluation(args) -> int:
             "sandbox_version": harness.sandbox_version,
             "spec_number": SPEC_NUMBER,
             "scenarios": result.scenarios,
-            "model": config.llm_model,
+            "model": f"policy:auto (default {config.llm_model})",
             "evaluation": {
                 "final_score": round(sr.final_score, 4),
                 "mean_quality": round(sr.mean_quality, 4),
@@ -314,6 +319,10 @@ def main():
     parser.add_argument(
         "--seed", type=int, default=None,
         help="Override epoch seed (default: derived from pack hash)",
+    )
+    parser.add_argument(
+        "--scenarios", default=None,
+        help="Comma-separated subset of the spec's scenarios to run (default: all)",
     )
     parser.add_argument(
         "--no-pull", action="store_true",

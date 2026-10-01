@@ -218,3 +218,15 @@ The full request/response spec for `/api/v2/validators/epoch_snapshot` (includin
 - **Score submission (v5.2 legacy)**: [API.md (POST /api/v2/scores/submit)](https://github.com/trajectoryRL/trajectoryrl.web/blob/main/API.md) — how the v5.2 daemon reports eval results during cutover
 - **Score submission (v6.0)**: [API.md (POST /api/v2/epoch/{challenge_epoch_id}/score)](https://github.com/trajectoryRL/trajectoryrl.web/blob/main/API.md) — the v6 critical path
 - **Heartbeat & log upload**: [API.md (POST /api/v2/validators/heartbeat, POST /api/validators/logs/upload)](https://github.com/trajectoryRL/trajectoryrl.web/blob/main/API.md)
+
+## Season 2 notes (v0.7.x)
+
+- Each scenario episode runs on its own internal Docker network (no egress) holding the scenario container,
+  the miner's policy sidecar, and the validator container under the alias `meter`. The validator's Engy key
+  never leaves the validator process; sidecars hold a per-episode token valid only at the meter.
+- An internal network can still reach the host's own address on that bridge. Do not run services that must
+  stay private on `0.0.0.0` on a validator host; bind them to a specific interface or localhost. The
+  validator's meter is the only service a sidecar is meant to reach.
+- The episode cap is $1.00 per scenario at the frozen price table (`EPISODE_CAP_USD`); a session is at most
+  26 x $1. Typical evaluations cost $0.5-10 depending on the challenger's policy. Watch your Engy balance.
+- `TRAJRL_SKIP_ORPHAN_SCAN` and `TRAJRL_SCENARIO_NET` are lab knobs; never set them on a validator.

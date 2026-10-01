@@ -1,5 +1,9 @@
 # Season 1: Self-Learning Agents
 
+> **Archived (2026-09-19).** This is the Season 1 design document. Season 2 (fusion policies) reuses this
+> sandbox, verifier and consensus design and changes the object of competition; see
+> [../FUSION_POLICY.md](../FUSION_POLICY.md) and [../ROADMAP.md](../ROADMAP.md).
+
 > **v0.30 (2026-05-14): Architecture pivot from agent-judge to shell_verifier.** The 3-container (sandbox + testee + judge), SSH-bounded, mock-services design described in pre-v0.30 revisions of this doc was deprecated 2026-05-03 and removed 2026-05-11. Current architecture: one **unified sandbox-agent container** per scenario, Terminal-Bench-style scenarios scored by `tests/test.sh` → `ctrf.json`. No mock services, no agent judge, no SSH boundary, no per-rep fixture variation. See `project_legacy_scenarios_deprecated.md` in TrajOS for the rollback rationale.
 
 ---

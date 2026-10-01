@@ -173,7 +173,7 @@ Miner-facing endpoint for submitting a `pack.json` directly to the web service â
 |--------|-------|-------|
 | 400 | Field-specific message | Missing/invalid required field, body not JSON, or `pack_hash` does not equal server-recomputed hash of `pack_content`. |
 | 400 | `pack_content must be â‰¤32768 bytes` | `pack_content` size cap. Total request body is also capped at 64 KB. |
-| 400 | `pack_content must be valid pack.json containing files.SKILL.md` | Pack shape check. |
+| 400 | `pack_content must be valid pack.json containing files.SKILL.md` | Pack shape check. Other entries in `files` (Season 2 policy files) are accepted and passed through to validators. |
 | 400 | `recycle receipt missing, malformed, or already consumed` | When `SUBMISSION_FEE_ENABLED=true`: `recycle_block`/`recycle_extrinsic_index` absent, not integers, or already consumed by a prior `pending_eval` submission. Note: async `fee_check` failure (amount < fee, >24h old, signer mismatch) yields a failed submission row rather than a `400`. |
 | 403 | Signature error | Timestamp drift > 5 min or invalid signature. |
 | 403 | `miner_hotkey is not a registered miner on-chain` | Hotkey absent from metagraph or deregistered. |
